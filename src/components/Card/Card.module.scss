@@ -1,0 +1,32 @@
+.card {
+    margin: auto;
+color: white;
+width: 50%;
+border-radius: 40px;
+background-color: rgba(255, 255, 255, 0.318);
+
+}
+
+.cardTop {
+    background: rgb(88,148,254);
+    background: linear-gradient(180deg, rgba(88,148,254,0.34943181818181823) 0%, rgba(88,148,254,1) 100%);
+ padding: 50px;
+ border-radius: 40px;
+
+}
+
+ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+gap: 10px;
+}
+
+
+li {
+    background-color: rgba(255, 255, 255, 0.339);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
