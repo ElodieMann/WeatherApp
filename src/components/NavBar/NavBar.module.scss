@@ -1,0 +1,35 @@
+.navbar {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 50px;
+
+    .sunIcon {
+        font-size: 5rem;
+        color: yellow;
+    }
+
+
+    nav{
+
+        display: flex;
+        gap: 20px;
+
+        .btnNav{
+            text-decoration: none;
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            color: #5892FA;
+            font-size: 1.5rem;
+        }
+        .btnNav:hover{
+            background-color: #5892FA;
+            color: white;
+            cursor: pointer;
+        }
+
+    }
+}

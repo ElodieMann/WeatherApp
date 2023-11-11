@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Quicksand:wght@500&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
@@ -5,5 +8,17 @@
 }
 
 .App {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.829);
+  font-family: 'Quicksand', sans-serif;
+min-height: 100vh;
 }
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+ 

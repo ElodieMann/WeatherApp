@@ -1,26 +1,26 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
+import styles from "./NavBar.module.scss";
 
 
-const NavBar = () => {
+const NavBar = ({setDisplay}) => {
   return (
     <div>
-      <div>
-        <FontAwesomeIcon icon={faSun} />
+      <div className={styles.navbar}>
+        <FontAwesomeIcon className={styles.sunIcon} icon={faSun} />
         <h1>WeatherApp</h1>
 
         <nav>
-          <NavLink to="/" activeStyle>
+          <button className={styles.btnNav} onClick={() => setDisplay('location')}>
             My Location
-          </NavLink>
-          <NavLink to="/search" activeStyle>
+          </button>
+          <button className={styles.btnNav} onClick={() => setDisplay('search')}>
             Search By City
-          </NavLink>
-          <NavLink to="/favorites" activeStyle>
+          </button >
+          <button className={styles.btnNav} onClick={() => setDisplay('favorites')}>
             My Favorites
-          </NavLink>
+          </button>
         </nav>
       </div>
     </div>

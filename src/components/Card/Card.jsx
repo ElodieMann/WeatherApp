@@ -1,77 +1,133 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowDown,
-  faArrowUp,
   faHeartCirclePlus,
   faWind,
   faDroplet,
   faEye,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Card.module.scss";
+import Loader from "../Loader";
 
-const Card = ({ data }) => {
+const Card = ({ data, loading }) => {
+  const [favoritesList, setFavoritesList] = useState([]);
+  const cardId = data?.city?.id;
+  const isFavorite = favoritesList?.some(li => li.city.id === cardId)
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (favorites?.length > 0) {
+      setFavoritesList(favorites);
+    }
+  }, []);
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const formattedTime = date.toLocaleString('en-US', { hour: 'numeric', hour12: true });
+    const formattedTime = date.toLocaleString("en-US", {
+      hour: "numeric",
+      hour12: true,
+    });
     return formattedTime;
   };
 
+  const getBackgroundClass = (description) => {
+    if (description) {
+      const lowercaseDescription = description.toLowerCase();
+
+      switch (true) {
+        case lowercaseDescription.includes("clouds"):
+          return styles.clouds;
+        case lowercaseDescription.includes("rain"):
+          return styles.rain;
+        case lowercaseDescription.includes("clear") ||
+          lowercaseDescription.includes("sun"):
+          return styles.clear;
+        case lowercaseDescription.includes("snow"):
+          return styles.snow;
+        case lowercaseDescription.includes("thunderstorm"):
+          return styles.thunderstorm;
+        case lowercaseDescription.includes("mist"):
+          return styles.mist;
+        default:
+          return styles.default;
+      }
+    } else {
+      return styles.default;
+    }
+  }
+
+  const saveToLocalStorage = () => {
+    let newFav = [];
+    if (isFavorite) {
+      newFav = favoritesList?.filter((li) => li.city.id !== cardId);
+    } else {
+      newFav = [...favoritesList, data];
+      console.log(newFav);
+    }
+    setFavoritesList(newFav);
+    localStorage.setItem("favorites", JSON.stringify(newFav));
+  };
+
   return (
-    <div className={styles.card}>
-      <div className={styles.cardTop}>
-        <h1>
-          {data?.city?.name}, {data?.city?.country}
-        </h1>
-        <h2>{data?.list?.[0].weather[0].description} </h2>
-        <h2>{data?.list?.[0].main.temp} °C</h2>
-
-        <img
-          src={`https://openweathermap.org/img/wn/${data?.list?.[0].weather[0].icon}@2x.png`}
-          alt=""
-        />
-
-        <div>
-          <p>Sunrise : {data?.city?.sunrise}</p>
-          <p>Sunset : {data?.city?.sunset}</p>
-        </div>
-        <p>
-          <FontAwesomeIcon icon={faWind} /> {data?.list?.[0].wind?.speed} km/h{" "}
-          <span>Wind</span>
-        </p>
-        <p>
-          <FontAwesomeIcon icon={faDroplet} /> {data?.list?.[0].main?.humidity}{" "}
-          % <span>Humidity</span>
-        </p>
-        <p>
-          <FontAwesomeIcon icon={faEye} /> {data?.list?.[0].visibility} km{" "}
-          <span>Visibility</span>
-        </p>
-        <p>
-              <FontAwesomeIcon icon={faArrowDown} /> {data?.list?.[0].main.temp_min} °C ||{" "}
-              <FontAwesomeIcon icon={faArrowUp} /> {data?.list?.[0].main.temp_max} °C
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className={styles.card}>
+          <div
+            className={`${styles.cardTop} ${getBackgroundClass(
+              data?.list?.[0].weather[0].description
+            )}`}
+          >
+            <h2>
+              {data?.city?.name}, {data?.city?.country}
+            </h2>
+            <p style={{ textTransform: "capitalize" }}>
+              {data?.list?.[0].weather[0].description}{" "}
             </p>
-      </div>
-      <div className={styles.cardBottom}>
-      <h3>Today</h3>
-      <ul >
-        {data?.list?.slice(1).map((day, index) => (
-          <li key={index}>
-            <p>{formatDate(day.dt_txt)}</p>
-            <img
-          src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
-          alt=""
-        />
-                 <p>{day.main.temp}°C </p>
+            <h1>{Math.round(data?.list?.[0].main.temp)}°</h1>
 
-          </li>
-        ))}
-      </ul>
-      </div>
-      <button>
-        <FontAwesomeIcon icon={faHeartCirclePlus} />
-      </button>
-    </div>
+            <div className={styles.infoCard}>
+              <p>
+                <FontAwesomeIcon icon={faWind} /> {data?.list?.[0].wind?.speed}{" "}
+                km/h <span>Wind</span>
+              </p>
+              <p>
+                <FontAwesomeIcon icon={faDroplet} />{" "}
+                {data?.list?.[0].main?.humidity} % <span>Humidity</span>
+              </p>
+              <p>
+                <FontAwesomeIcon icon={faEye} /> {data?.list?.[0].visibility} km{" "}
+                <span>Visibility</span>
+              </p>
+            </div>
+          </div>
+          <div className={styles.cardBottom}>
+            <h3>Today</h3>
+            <ul>
+              {data?.list?.slice(1).map((day, index) => (
+                <li key={index}>
+                  <p>{formatDate(day.dt_txt)}</p>
+                  <img
+                    src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                    alt=""
+                  />
+                  <p>{Math.round(day.main.temp)}°C </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <button onClick={saveToLocalStorage}>
+            {isFavorite ? (
+              <FontAwesomeIcon icon={faTrash} />
+            ) : (
+              <FontAwesomeIcon icon={faHeartCirclePlus} />
+            )}
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 

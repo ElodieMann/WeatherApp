@@ -1,32 +1,141 @@
 .card {
-    margin: auto;
-color: white;
-width: 50%;
-border-radius: 40px;
-background-color: rgba(255, 255, 255, 0.318);
+  margin: auto;
+  color: white;
+  border-radius: 40px;
+  background-color: rgba(255, 255, 255, 0.183);
+  width: 60%;
+  
+  position: relative;
 
-}
+  .cardTop {
+    position: relative;
+    padding: 50px;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    height: 80vh;
 
-.cardTop {
-    background: rgb(88,148,254);
-    background: linear-gradient(180deg, rgba(88,148,254,0.34943181818181823) 0%, rgba(88,148,254,1) 100%);
- padding: 50px;
- border-radius: 40px;
+    h2, p, h1, div {
+      z-index: 2;
 
-}
+    }
 
-ul {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);  
+      z-index: 1;  
+      border-radius: 40px;
+
+    }
+
+
+
+    p {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    span {
+      font-size: 0.8rem;
+    }
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  h3 {
+    margin: 30px 30px 0 30px;
+  }
+
+  .infoCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+
+  }
+
+  ul {
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-gap: 10px;
-}
+    display: flex;
+    overflow-x: auto;
+    padding: 30px;
+    margin: 0;
+    gap: 30px;
+  }
 
-
-li {
-    background-color: rgba(255, 255, 255, 0.339);
+  li {
+    background-color: rgba(255, 255, 255, 0.104);
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 20px;
+    padding: 10px;
+    width: 25%;
+  }
+
+  button {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    z-index: 2;
+
+    :hover {
+      color: yellow;
+      cursor: pointer;
+    }
+  }
+}
+
+.clear {
+  background: url(../../assets/sun.jpg) no-repeat center / cover;
+}
+
+.clouds {
+  background: url(../../assets/cloud.jpg) no-repeat center / cover;
+}
+
+.rain {
+  background: url(../../assets/rain.jpg) no-repeat center / cover;
+}
+
+.thunderstorm {
+  background: url(../../assets/thunderstorm.jpg) no-repeat center / cover;
+}
+
+.snow {
+  background: url(../../assets/snow.jpg) no-repeat center / cover;
+}
+
+.mist {
+  background: url(../../assets/mist.jpg) no-repeat center / cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
