@@ -1,10 +1,8 @@
 import "./App.css";
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./components/NavBar/NavBar";
 import Favorites from "./components/Favorites/Favorites";
 import Search from "./components/Search/Search";
-import Card from "./components/Card/Card";
-import Loader from "./components/Loader";
 import Location from "./components/Location/Location";
 import { getDataByCity } from "./services/api";
 
@@ -20,6 +18,7 @@ function App() {
   }, [city]);
 
   const fetchApi = async () => {
+    setLoading(true);
     try {
       const response = await getDataByCity(city)
       setData(response);

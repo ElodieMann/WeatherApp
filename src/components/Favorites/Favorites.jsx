@@ -8,7 +8,7 @@ const Favorites = ({ display }) => {
     <div>
       {savedCards.length > 0 ? (
         savedCards?.map((data, index) => (
-          <div key={index}>
+          <div key={index} style={{marginTop: '50px'}}>
             <Card data={data} />
           </div>
         ))

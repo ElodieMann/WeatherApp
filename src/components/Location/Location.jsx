@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
 import Card from "../Card/Card";
+import Loader from "../Loader";
+import React, { useEffect, useState } from "react";
 import { getDataByCity } from "../../services/api";
 
-const Location = ({ display, setLoading, loading }) => {
+const Location = ({ display }) => {
   const [location, setLocation] = useState("");
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -21,6 +23,7 @@ const Location = ({ display, setLoading, loading }) => {
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   };
 
   const fetchLocation = async () => {
@@ -49,7 +52,7 @@ const Location = ({ display, setLoading, loading }) => {
     }
   };
   return display ? (
-    <div>{data && <Card data={data} loading={loading} />}</div>
+    <div>{loading ? <Loader /> : <Card data={data} />}</div>
   ) : null;
 };
 

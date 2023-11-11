@@ -1,17 +1,18 @@
 import React from "react";
-import { Audio } from "react-loader-spinner";
+import { ClipLoader } from "react-spinners";
 
 const Loader = () => {
+  const override = {
+    display: "block",
+    margin: "0 auto",
+  
+  };
   return (
-    <Audio
-      height="80"
-      width="80"
-      radius="9"
-      color="green"
-      ariaLabel="loading"
-      wrapperStyle
-      wrapperClass
-    />
+    <ClipLoader 
+    size={130} 
+    color={"#FDB813"} 
+    cssOverride={override}
+    loading={true} />
   );
 };
 

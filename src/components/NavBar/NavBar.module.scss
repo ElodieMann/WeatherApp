@@ -22,13 +22,15 @@
             background-color: white;
             padding: 10px;
             border-radius: 10px;
-            color: #5892FA;
+            color: black;
             font-size: 1.5rem;
+            border: none;
         }
         .btnNav:hover{
-            background-color: #5892FA;
+            background-color: black;
             color: white;
             cursor: pointer;
+            border: 1px solid white;
         }
 
     }

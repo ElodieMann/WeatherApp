@@ -1,3 +1,4 @@
+import Loader from "../Loader";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,8 +8,8 @@ import {
   faEye,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import { formatDate } from "../../services/utiles";
 import styles from "./Card.module.scss";
-import Loader from "../Loader";
 
 const Card = ({ data, loading }) => {
   const [favoritesList, setFavoritesList] = useState([]);
@@ -22,14 +23,7 @@ const Card = ({ data, loading }) => {
     }
   }, []);
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const formattedTime = date.toLocaleString("en-US", {
-      hour: "numeric",
-      hour12: true,
-    });
-    return formattedTime;
-  };
+
 
   const getBackgroundClass = (description) => {
     if (description) {
