@@ -17,6 +17,7 @@ export const getMyLocation = async (location) => {
     );
     const data = await response.json();
     console.log(data, "api");
+    // toujours supprimer les console.log
     return data;
   });
 };

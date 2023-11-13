@@ -41,6 +41,7 @@ const Location = ({ display }) => {
                 data.address.town ||
                 data.address.village ||
                 data.address.county
+              // met les valeurs dans une const tel que cityName et quand tu setLocation(cityName)
             );
           }
         });
