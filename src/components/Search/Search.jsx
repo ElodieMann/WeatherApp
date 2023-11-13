@@ -22,10 +22,8 @@ const Search = ({ setCity, data, loading, display }) => {
           value={valueInput}
         />
       </form>
-      {isValid && <Card data={data} loading={loading} />}
-      {/* {isValid && data && <Card data={data} loading={loading} />} 
-      la data doit etre aussi disponible pour afficher la card
-      */} 
+      {isValid && data && <Card data={data} loading={loading} />}
+   
     </div>
   ) : null;
 };

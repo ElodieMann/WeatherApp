@@ -36,13 +36,12 @@ const Location = ({ display }) => {
           );
           const data = await response.json();
           if (data.address) {
-            setLocation(
+            const cityName =
               data.address.city ||
-                data.address.town ||
-                data.address.village ||
-                data.address.county
-              // met les valeurs dans une const tel que cityName et quand tu setLocation(cityName)
-            );
+              data.address.town ||
+              data.address.village ||
+              data.address.county;
+            setLocation(cityName);
           }
         });
       } else {

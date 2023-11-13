@@ -15,8 +15,7 @@ const Card = ({ data, loading }) => {
   const [favoritesList, setFavoritesList] = useState([]);
 
   const cardId = data?.city?.id;
-  const isFavorite = favoritesList?.some(li => li.city.id === cardId)
-
+  const isFavorite = favoritesList?.some((li) => li.city?.id === cardId);
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -25,9 +24,11 @@ const Card = ({ data, loading }) => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log(favoritesList);
+    localStorage.setItem("favorites", JSON.stringify(favoritesList));
+  }, [favoritesList]);
 
-
-  // cette fonction doit etre dans le fichier utils ...
   const getBackgroundClass = (description) => {
     if (description) {
       const lowercaseDescription = description.toLowerCase();
@@ -52,18 +53,17 @@ const Card = ({ data, loading }) => {
     } else {
       return styles.default;
     }
-  }
+  };
 
   const saveToLocalStorage = () => {
     let newFav = [];
     if (isFavorite) {
-      newFav = favoritesList?.filter((li) => li.city.id !== cardId);
+      newFav = favoritesList?.filter((li) => li.city?.id !== cardId);
     } else {
       newFav = [...favoritesList, data];
       console.log(newFav);
     }
     setFavoritesList(newFav);
-    localStorage.setItem("favorites", JSON.stringify(newFav));
   };
 
   return (
