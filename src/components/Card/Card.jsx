@@ -13,8 +13,10 @@ import styles from "./Card.module.scss";
 
 const Card = ({ data, loading }) => {
   const [favoritesList, setFavoritesList] = useState([]);
+
   const cardId = data?.city?.id;
   const isFavorite = favoritesList?.some(li => li.city.id === cardId)
+
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -25,6 +27,7 @@ const Card = ({ data, loading }) => {
 
 
 
+  // cette fonction doit etre dans le fichier utils ...
   const getBackgroundClass = (description) => {
     if (description) {
       const lowercaseDescription = description.toLowerCase();
